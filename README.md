@@ -1,4 +1,4 @@
-## AGENT-P: Associating Gene Expression to Neuroimaging Traits Pipeline
+## AGENT-P: The Association of Gene Expression to Neuroimaging Traits Pipeline
 
 ### Table of Contents
 
@@ -39,18 +39,18 @@ My machine runs the following specs:
  - Python/3.8.6
  - R/4.0.5
 
-**A)** First, clone the AGENT-P repository (currently called `neurogen`). Note that for this beta version, you'll need to be able to import classes that exist in this repo. 
+**A)** First, clone the AGENT-P repository (currently called `dev_agentp`). Note that for this beta version, you'll need to be able to import classes that exist in this repo. 
 ```
-git clone --recurse-submodules git@github.com:nhunghoang/neurogen.git
+git clone --recurse-submodules git@github.com:nhunghoang/dev_agentp.git
 ```
 
 **B)** Download and extract the TWAS `models.tar.gz` file into the main level of the repository. [[link to file]](https://drive.google.com/file/d/1llysnSFOut3E_g1omlgQfi-N5fptuuLa/view?usp=sharing)
 ```
-cd neurogen
+cd dev_agentp
 tar -xvzf models.tar.gz
 ```
 
-**C)** I recommend running AGENT-P in a python virtual environment with the following python packages. If using `pip`, you can call `pip install -r neurogen/requirements.txt`. 
+**C)** I recommend running AGENT-P in a python virtual environment with the following python packages. If using `pip`, you can call `pip install -r dev_agentp/requirements.txt`. 
 
  - numpy >= 1.23.5
  - pandas >= 1.5.3
@@ -62,11 +62,11 @@ tar -xvzf models.tar.gz
  - patsy >= 0.5.6
  - bitarray >= 3.0.0
 
-**D)** Download the appropriate alpha build of `plink2` from [here](https://www.cog-genomics.org/plink/2.0/) and unzip it into the `neurogen/software` folder.  
+**D)** Download the appropriate alpha build of `plink2` from [here](https://www.cog-genomics.org/plink/2.0/) and unzip it into the `dev_agentp/software` folder.  
 
 **E)** Next, you have to manually download `bgenix` and compile it. On your UNIX terminal:
 ```
-cd neurogen/software
+cd dev_agentp/software
 wget http://code.enkre.net/bgen/tarball/release/bgen.tgz
 tar -xvzf bgen.tgz 
 mv bgen.tgz bgen
@@ -77,11 +77,11 @@ cd bgen
 
 **F)** Then, compile the provided REGENIE software: 
 ```
-cd neurogen/software/regenie
+cd dev_agentp/software/regenie
 make
 ```
 
-**G)** Lastly, launch R from inside the main repo (`neurogen`) and run the following commands: 
+**G)** Lastly, launch R from inside the main repo (`dev_agentp`) and run the following commands: 
 ```
 install.packages(c('optparse','RColorBrewer'))
 install.packages('software/plink2R/plink2R/',repos=NULL)
@@ -91,7 +91,7 @@ Hopefully that's it!
 ___
 ___
 ### Quick-start Example
-Here's example code that tests out all the features of AGENT-P. This code is available as a script (`neurogen/quickstart_example.py`) and will run from within the `neurogen` directory. This code uses the data provided in `neurogen/test_data`. 
+Here's example code that tests out all the features of AGENT-P. This code is available as a script (`example/run_example.py`) and will run from within the `dev_agentp` directory. This code uses the data provided in `example/example_data`. 
 ```
 from Project import Project 
 from TWAS import SummaryTWAS, GenotypeTWAS 
@@ -113,7 +113,7 @@ stwas.add_gwas('amygdala_volume', 'test_data/vol_mean_amygdala.regenie')
 stwas.run_twas('amygdala_volume') 
 
 ## TWAS results are saved to
-## neurogen/agentp_test/sTWAS/JTI_hippocampus/amygdala_volume.csv
+## dev_agentp/agentp_test/sTWAS/JTI_hippocampus/amygdala_volume.csv
 
 '''
 init a genotype twas that uses FUSION models trained on caudate genes
@@ -133,7 +133,7 @@ gtwas.predict_grex()
 gtwas.run_twas('putamen_volume')
 
 ## TWAS results are saved to
-## neurogen/agentp_test/gTWAS/FUS_caudate/putamen_volume.csv
+## dev_agentp/agentp_test/gTWAS/FUS_caudate/putamen_volume.csv
 
 '''
 init a gwas 
@@ -145,7 +145,7 @@ gwas = GWAS(project)
 gwas.run('hippocampus_volume')
 
 ## GWAS results are saved to
-## neurogen/agentp_test/GWAS/hippocampus_volume.regenie
+## dev_agentp/agentp_test/GWAS/hippocampus_volume.regenie
 ```
 ___
 ___
